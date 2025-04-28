@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Bloc;
+import com.example.demo.entities.Chambre;
 import com.example.demo.repositories.IBlocRepository;
+import com.example.demo.repositories.IChambreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.List;
 public class BlocService implements IBlocService{
     @Autowired
     IBlocRepository blocRepository;
+    @Autowired
+    IChambreRepository chambreRepository;
     @Override
     public List<Bloc> retrieveBlocs() {
         return (List<Bloc>) blocRepository.findAll();
@@ -34,5 +38,16 @@ public class BlocService implements IBlocService{
     @Override
     public void removeBloc(Long idBloc) {
             blocRepository.deleteById(idBloc);
+    }
+
+    @Override
+    public Bloc addChambresToBloc(List<Long> numChambres, Long idBloc) {
+        Bloc blc = blocRepository.findById(idBloc).orElse(null);
+        List<Chambre> chambres=chambreRepository.findAllById(numChambres);
+        if (blc!=null && !chambres.isEmpty()){
+            blc.setChambres(chambres);
+            return blocRepository.save(blc);
+        }
+        return null;
     }
 }

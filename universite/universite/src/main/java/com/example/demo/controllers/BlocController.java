@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@RestController
+@RequestMapping("/bloc")
 public class BlocController {
     @Autowired
     IBlocService blocService;
@@ -34,5 +37,9 @@ public class BlocController {
     public void removeBloc(@PathVariable("id") Long id){
         blocService.removeBloc(id);
     }
-    
+
+    @PutMapping("/{idBloc}/add-chambres-list")
+    public Bloc addChambresToBloc(@PathVariable("idBloc") Long idBloc, @RequestBody List<Long> numChambres) {
+        return blocService.addChambresToBloc(numChambres, idBloc);
+    }
 }

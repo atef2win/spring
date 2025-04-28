@@ -19,9 +19,14 @@ public class EtudiantController {
         return etudiantService.retrieveAllEtudiants();
     }
 
-    @PostMapping("/add-Etudiant")
+    @PostMapping("/add-etudiants")
     public List<Etudiant> addEtudiants(@RequestBody List<Etudiant> etudiants){
         return etudiantService.addEtudiants(etudiants);
+    }
+
+    @PostMapping("/add-etudiant")
+    public Etudiant addEtudiant(@RequestBody Etudiant etudiants){
+        return etudiantService.addEtudiant(etudiants);
     }
 
     @PutMapping("/update-Etudiant")

@@ -1,7 +1,10 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Bloc;
 import com.example.demo.entities.Foyer;
+import com.example.demo.entities.Universite;
 import com.example.demo.repositories.IFoyerRepository;
+import com.example.demo.repositories.IUniversiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,9 @@ public class FoyerService implements IFoyerService{
 
     @Autowired
     IFoyerRepository foyerRepository;
+
+    @Autowired
+    IUniversiteRepository universiteRepository;
 
 
     @Override
@@ -36,5 +42,15 @@ public class FoyerService implements IFoyerService{
     @Override
     public void removeFoyer(Long idFoyer) {
         foyerRepository.deleteById(idFoyer);
+    }
+
+    @Override
+    public Foyer affecterUniversite(Foyer foyer, Long idUniversite) {
+        Universite univ = universiteRepository.findById(idUniversite).orElse(null);
+        if (univ != null) {
+            foyer.setUniversite(univ);
+            return foyerRepository.save(foyer);
+        }
+        return null;
     }
 }

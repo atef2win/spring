@@ -10,4 +10,6 @@ public interface IFoyerService {
     public Foyer updateFoyer(Foyer f);
     public Foyer retrieveFoyer(Long idFoyer);
     public void removeFoyer(Long idFoyer);
+
+    public Foyer affecterUniversite(Foyer foyer, Long idUniversite);
 }

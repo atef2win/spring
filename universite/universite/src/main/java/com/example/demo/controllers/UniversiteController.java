@@ -33,4 +33,15 @@ public class UniversiteController {
     {
         return universiteService.retrieveUniversite(id);
     }
+
+    @PutMapping("/add-foyer/{idFoyer}/{nomUniversite}")
+    public Universite addFoyerToUniversite(@PathVariable("idFoyer") Long idFoyer, @PathVariable("nomUniversite") String nomUniversite) {
+        return universiteService.addFoyerToUniversite(idFoyer, nomUniversite);
+    }
+    @PutMapping("/remove-foyer/{idUniversite}")
+    public Universite RemoveFoyerFromUniversite(@PathVariable("idUniversite") Long idUniversite) {
+        return universiteService.RemoveFoyerFromUniversite(idUniversite);
+    }
+
+
 }

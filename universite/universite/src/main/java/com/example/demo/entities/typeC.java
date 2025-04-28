@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
-public enum typeC {
+import java.io.Serializable;
+
+public enum TypeC implements Serializable {
 
     SIMPLE, DOUBLE, TRIPLE
 
